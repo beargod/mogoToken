@@ -188,7 +188,6 @@ function cbTransfer(e,r) {
         toastr.error('请求失败,'+e);
         return;
     }
-    $('.txhash').attr('href',"https://ropsten.etherscan.io/tx/"+r);
     txhash.lastTxhash = r;
     toastr.success('请求成功,txhash为'+r+',可在区块链浏览器查看交易');
 

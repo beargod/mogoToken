@@ -59,7 +59,7 @@
         <!-- Links -->
         <ul class="nav navbar-nav nav-flex-icons ml-auto txhash">
             <li class="nav-item">
-                <a class="nav-link" target="_blank" v-show="lastTxhash">
+                <a class="nav-link" v-bind:href="['https://ropsten.etherscan.io/tx/'+lastTxhash]" target="_blank" v-show="lastTxhash">
                     查看上一个交易的详情
                 </a>
                 <a class="nav-link" href="https://metamask.io/" target="_blank" v-show="!metamask">

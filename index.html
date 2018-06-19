@@ -57,12 +57,12 @@
 
 
         <!-- Links -->
-        <ul class="nav navbar-nav nav-flex-icons ml-auto ">
+        <ul class="nav navbar-nav nav-flex-icons ml-auto txhash">
             <li class="nav-item">
-                <a class="nav-link txhash" target="_blank" v-if="lastTxhash">
+                <a class="nav-link" target="_blank" v-show="lastTxhash">
                     查看上一个交易的详情
                 </a>
-                <a class="nav-link txhash" href="https://metamask.io/" target="_blank" v-if="!metamask">
+                <a class="nav-link" href="https://metamask.io/" target="_blank" v-show="!metamask">
                     请点我安装MetaMask插件
                 </a>
             </li>

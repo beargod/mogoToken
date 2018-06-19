@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Mogo Admin</title>
+    <title>mogo admin</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -62,6 +62,9 @@
                 <a class="nav-link txhash" target="_blank" v-if="lastTxhash">
                     查看上一个交易的详情
                 </a>
+                <a class="nav-link txhash" href="https://metamask.io/" target="_blank" v-if="!metamask">
+                    请点我安装MetaMask插件
+                </a>
             </li>
         </ul>
     </nav>
@@ -74,7 +77,7 @@
             <li class="logo-sn waves-effect">
                 <div class="text-center">
                     <h1 href="#" class="pl-0 blue-text">
-                        <strong>MOGO</strong>
+                        <strong>mogo</strong>
                     </h1>
                 </div>
             </li>
@@ -139,7 +142,7 @@
                 <div class="col-md-6">
                     <!--Panel Header-->
                     <div class="view py-3 gradient-card-header info-color-dark">
-                        <h5 class="mb-0">Mogo Token数据</h5>
+                        <h5 class="mb-0">mogo token数据</h5>
                     </div>
                     <!--/Panel Header-->
 

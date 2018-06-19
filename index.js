@@ -3,7 +3,8 @@ var mogo = "";
 var txhash = new Vue({
     el:".txhash",
     data:{
-        lastTxhash:""
+        lastTxhash:"",
+        metamask:1
     }
 })
 var content = new Vue({
@@ -166,6 +167,10 @@ $.getJSON('addresses.json', function (data) {
 
 $.getJSON('abi.json', function (data) {
     var contractABI = data;
+    if(!web3){
+        content.metamask=0;
+        return;
+    }
     if (contractABI != ''){
         var mogoContract = web3.eth.contract(contractABI);
         address = web3.eth.accounts[0]

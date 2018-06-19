@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Mogo Admin</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <!--<link href="../css/style.css" rel="stylesheet">-->
+
+    <style>
+        body {
+            background-color: #eee;
+        }
+
+        .side-nav .logo-sn {
+            padding-bottom: 1rem;
+            padding-top: 1rem;
+        }
+
+        .side-nav .logo-sn img {
+            height: 38px;
+        }
+
+        .side-nav .search-form input[type=text] {
+            margin-top: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+
+</head>
+
+<body class="fixed-sn navy-blue-skin">
+<!--Main navigation-->
+<header>
+
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark double-nav fixed-top scrolling-navbar">
+        <!-- SideNav slide-out button -->
+        <div class="float-left">
+            <a href="#" data-activates="slide-out" class="button-collapse">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+
+        <div class="breadcrumb-dn mr-auto">
+            <p>详情</p>
+        </div>
+
+
+        <!-- Links -->
+        <ul class="nav navbar-nav nav-flex-icons ml-auto ">
+            <li class="nav-item">
+                <a class="nav-link txhash" target="_blank" v-if="lastTxhash">
+                    查看上一个交易的详情
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!--/Navbar-->
+
+    <!--Sidebar navigation-->
+    <div id="slide-out" class="side-nav fixed sn-bg-4">
+        <ul class="custom-scrollbar list-unstyled">
+            <!--logo-->
+            <li class="logo-sn waves-effect">
+                <div class="text-center">
+                    <h1 href="#" class="pl-0 blue-text">
+                        <strong>MOGO</strong>
+                    </h1>
+                </div>
+            </li>
+
+        </ul>
+
+        <div class="sidenav-bg mask-strong"></div>
+    </div>
+    <!--/Sidebar navigation-->
+
+</header>
+<!--/Main navigation-->
+
+<!--Main layout-->
+<main>
+    <div class="container-fluid mogoapp">
+
+
+        <!--Section: Modals-->
+        <section>
+
+            <!--Modal: modalConfirmDelete-->
+            <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                    <!--Content-->
+                    <div class="modal-content text-center">
+                        <!--Header-->
+                        <div class="modal-header d-flex justify-content-center">
+                            <p class="heading">Are you sure?</p>
+                        </div>
+
+                        <!--Body-->
+                        <div class="modal-body">
+
+                            <i class="fa fa-times fa-4x animated rotateIn"></i>
+
+                        </div>
+
+                        <!--Footer-->
+                        <div class="modal-footer flex-center">
+                            <a href="https://mdbootstrap.com/product/material-design-for-bootstrap-pro/"
+                               class="btn  btn-outline-secondary-modal">Yes</a>
+                            <a type="button" class="btn  btn-primary-modal waves-effect" data-dismiss="modal">No</a>
+                        </div>
+                    </div>
+                    <!--/.Content-->
+                </div>
+            </div>
+            <!--Modal: modalConfirmDelete-->
+
+        </section>
+        <!--Section: Modals-->
+
+
+        <!--Section: Main panel-->
+        <section class="card card-cascade narrower mb-5">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-6">
+                    <!--Panel Header-->
+                    <div class="view py-3 gradient-card-header info-color-dark">
+                        <h5 class="mb-0">Mogo Token数据</h5>
+                    </div>
+                    <!--/Panel Header-->
+
+                    <!--Panel content-->
+                    <div class="card-body">
+                        <!--Grid row-->
+                        <div class="row">
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p class="lead">
+                                    <span class="badge col-md-5 info-color-dark p-2">全名</span>
+
+                                </p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p class="lead">
+                                    {{tokenName}}({{symbol}})
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p>
+                                    <span class="badge col-md-5 info-color-dark p-2">持有人</span>
+
+                                </p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p class="lead">
+                                    {{owner}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p class="lead">
+                                    <span class="badge col-md-5 info-color-dark p-2">总量</span>
+
+                                </p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p class="lead">
+                                    {{totalSupply}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p>
+                                    <span class="badge col-md-5 info-color-dark p-2">流通量</span>
+
+                                </p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p class="lead">
+                                    {{circulate}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p>
+                                    <span class="badge col-md-5 info-color-dark p-2">转账状态</span>
+
+                                </p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p class="lead" v-show="!paused">
+                                    可以转账
+                                </p>
+                                <p class="lead" v-show="paused">
+                                    不可转账
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p>
+                                    <span class="badge col-md-5 info-color-dark p-2">账户余额</span>
+                                </p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p class="lead">
+                                    {{ownerBalance}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p>
+                                    <span class="badge col-md-5 info-color-dark p-2">账户个数</span>
+                                </p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <!--Date select-->
+                                <p class="lead">
+                                    1
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--/Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6">
+
+                    <div class="view py-3 gradient-card-header info-color-dark">
+                        <h5 class="mb-0">Mogo Token操作</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="col-md-6 mb-4">
+                            <!--Date select-->
+                            <p>
+                                <span class="badge col-md-5 info-color-dark p-2">转账</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class=" md-form" style="margin-left: 20px;">
+                                        <input id="account_address" class="form-control border" v-model="targetAddress"
+                                               type="text" length="42">
+                                        <label for="account_address">&emsp;目标钱包地址</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="md-form">
+                                        <input id="account_value" class="form-control border" v-model="targetValue"
+                                               type="number" step="0.0001">
+                                        <label for="account_value">&emsp;转账金额</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <button class=" btn btn-outline-success btn-sm my-0 waves-effect waves-light"
+                                    @click="transfer(targetAddress,targetValue)">
+                                确认转账
+                            </button>
+                        </div>
+                        <div class="row" style="margin-left: 5px">
+                            <div class="col-md-4 mb-4">
+                                <!--Date select-->
+                                <p>
+                                    <span class="badge col-md-5 info-color-dark p-2">转账状态</span>
+                                </p>
+                                <div class="switch" style="margin-top: 33px;margin-bottom: 20px">
+                                    <label v-show="changePaused">
+                                        可以转账
+                                    </label>
+                                    <label v-show="!changePaused">
+                                        不可转账
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" v-model="changePaused">
+                                        <span class="lever"></span>
+                                    </label>
+                                </div>
+                                <button class=" btn btn-outline-success btn-sm my-0 waves-effect waves-light"
+                                        @click="pausedChange">
+                                    确认修改
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <!--Date select-->
+                                <p>
+                                    <span class="badge col-md-5 info-color-dark p-2">冻结账户</span>
+                                </p>
+
+                                <div class=" md-form ">
+                                    <input id="freeze_address" class="form-control border" v-model="freezeAddress"
+                                           type="text" length="42">
+                                    <label for="freeze_address">&emsp;目标钱包地址</label>
+                                </div>
+                                <div v-show="!fronze">
+                                    未冻结
+                                    <button class=" btn btn-outline-success btn-sm my-0 waves-effect waves-light"
+                                            @click="fronzeAccount">
+                                        冻结
+                                    </button>
+                                </div>
+
+                                <div v-show="fronze">
+                                    已冻结
+                                    <button class=" btn btn-outline-success btn-sm my-0 waves-effect waves-light"
+                                            @click="fronzeAccount">
+                                        解冻
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <!--Date select-->
+                                <p>
+                                    <span class="badge col-md-5 info-color-dark p-2">移交合约</span>
+                                </p>
+
+                                <div class=" md-form ">
+                                    <input id="owner_address" class="form-control border" v-model="newOwnerAddress"
+                                           type="text" length="42">
+                                    <label for="owner_address">&emsp;目标钱包地址</label>
+                                </div>
+                                <button class=" btn btn-outline-success btn-sm my-0 waves-effect waves-light"
+                                        @click="changeOwner">
+                                    确认移交
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--/Panel header-->
+            </div>
+            <!--/Grid column-->
+            <!--/Grid row-->
+
+        </section>
+        <!--/Section: Main panel-->
+
+        <!--Section: Table-->
+        <section class="mb-5">
+
+
+            <div class="card card-cascade narrower">
+                <!--Card header-->
+                <div
+                        class="view py-3 gradient-card-header info-color-dark mx-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <input type="file" class="btn btn-outline-white btn-rounded btn-sm px-2 file-field"
+                               id="batchFile">
+                        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2" @click="load">
+                            导入文件
+                        </button>
+                    </div>
+
+                    <a href="" class="white-text mx-3">批量转账</a>
+
+                    <div>
+
+                        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2" @click="addAddress">
+                            添加
+                        </button>
+
+                        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"
+                                @click="deleteAddress">
+                            删除
+                        </button>
+
+                        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2" @click="save">
+                            保存
+                        </button>
+
+                        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"
+                                @click="aBatchTransfer">
+                            确认转账
+                        </button>
+                    </div>
+                </div>
+                <!--/Card header-->
+
+
+                <!--Card content-->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="checkbox" v-model="allSelect">
+                                    <label for="checkbox" class="label-table"></label>
+                                </th>
+                                <th class="th-lg">备注</th>
+                                <th class="th-lg">地址</th>
+                                <th class="th-lg">转账金额</th>
+                                <th class="th-lg">转账状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(anAddress,index) in cBatchAddress">
+                                <th scope="row">
+                                    <input type="checkbox" v-bind:id="['checkbox'+index]" v-model="anAddress.selected">
+                                    <label v-bind:for="['checkbox'+index]" class="label-table"></label>
+                                </th>
+                                <td><input class="form-control border-0" v-model="anAddress.name" type="text"
+                                           length="42"></td>
+                                <td><input class="form-control border-0" v-model="anAddress.address" type="text"
+                                           length="42"></td>
+                                <td><input class="form-control border-0" v-model="anAddress.value" type="text"
+                                           length="42"></td>
+                                <td><input class="form-control border-0" v-model="anAddress.isSend" type="text"
+                                           length="42"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr class="my-0">
+
+                    <!--Bottom table UI-->
+                    <div class="d-flex justify-content-between">
+                        <!--Pagination -->
+                        <nav class="mt-4">
+                            <ul class="pagination pagination-circle pg-blue mb-0">
+
+                                <!--First-->
+                                <li class="page-item disabled" v-show="currentPage==1">
+                                    <a class="page-link">First</a>
+                                </li>
+
+                                <li class="page-item" v-show="currentPage>1">
+                                    <a class="page-link" @click="changePage(1)">First</a>
+                                </li>
+
+                                <!--Arrow left-->
+                                <li class="page-item disabled" v-show="currentPage==1">
+                                    <a class="page-link" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+
+                                <li class="page-item" v-show="currentPage>1" @click="changePage(currentPage-1)">
+                                    <a class="page-link" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+
+                                <!--Numbers-->
+                                <div v-for="index in pageSize">
+                                    <li class="page-item active" v-show="currentPage==index">
+                                        <a class="page-link" @click="changePage(index)">{{index}}</a>
+                                    </li>
+                                    <li class="page-item" v-show="currentPage!=index">
+                                        <a class="page-link" @click="changePage(index)">{{index}}</a>
+                                    </li>
+                                </div>
+
+                                <li class="page-item disabled" v-show="currentPage==pageSize">
+                                    <a class="page-link" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+
+                                <li class="page-item">
+                                    <a class="page-link" aria-label="Next" v-show="currentPage<pageSize"
+                                       @click="changePage(currentPage+1)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+
+                                <li class="page-item disabled" v-show="currentPage==pageSize">
+                                    <a class="page-link">Last</a>
+                                </li>
+                                <!--First-->
+                                <li class="page-item" v-show="currentPage<pageSize">
+                                    <a class="page-link" @click="changePage(pageSize)">Last</a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                        <!--/Pagination -->
+
+                    </div>
+                    <!--/Bottom table UI-->
+                </div>
+                <!--/Card content-->
+
+            </div>
+
+        </section>
+        <!--/Section: Table-->
+
+    </div>
+</main>
+<!--Main layout-->
+
+<footer>
+
+    <!--Footer-->
+    <footer class="page-footer center-on-small-only">
+
+        <!--Copyright-->
+        <div class="footer-copyright">
+            <div class="container-fluid">
+                © 2015 Copyright:
+                <a href="https://www.MDBootstrap.com"> MDBootstrap.com </a>
+
+            </div>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
+    <!--/.Footer-->
+
+</footer>
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/FileSaver.min.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/inpage.js"></script>
+<script type="text/javascript" src="js/web3.min.js"></script>
+<script type="text/javascript" src="js/bignumber.js"></script>
+<script type="text/javascript" src="index.js"></script>
+
+</body>
+
+</html>

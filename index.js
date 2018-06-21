@@ -86,7 +86,7 @@ var content = new Vue({
                 if (this.batchAddress[i].selected){
                     this.batchAddress[i].isSend="已转账";
                     addresses.push(this.batchAddress[i].address);
-                    balance.push(this.batchAddress[i].value);
+                    balance.push(numberToBigNumber(this.batchAddress[i].value));
                 }
             }
             if(addresses.length>100){

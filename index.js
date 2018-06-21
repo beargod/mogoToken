@@ -91,9 +91,11 @@ var content = new Vue({
             }
             if(addresses.length>100){
                 toastr.error('批量转账数量不能100');
+                return;
             }
             if(addresses.length==0){
                 toastr.error('批量转账数量不能为0');
+                return;
             }
             mogo.batchTransfer(addresses,balance,cbTransfer);
         },

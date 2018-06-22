@@ -176,7 +176,7 @@ $.getJSON('abi.json', function (data) {
     if (contractABI != ''){
         var mogoContract = web3.eth.contract(contractABI);
         address = web3.eth.accounts[0]
-        mogo = mogoContract.at("0xf561f259be5ed8ee0f831325eda8fffdcbae8d3b");
+        mogo = mogoContract.at("0x472eb1a4c31e4c6557feb00e90987e564ca412af");
         var result = mogo.owner.getData();
         console.log("result:"+result);
         loadTokenData();
